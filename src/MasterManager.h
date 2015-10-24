@@ -1,12 +1,19 @@
 #ifndef INCLUDED_MASTERMANAGER
 #define INCLUDED_MASTERMANAGER
-#include "Object/Object.h"
+#include "Window/Window.h"
+
+class Solid;
 
 class MasterManager {
     private:
-        Object* object;
+        Solid* solid;
+        Window* window;
 
     public:
-        void gameGo();
+        MasterManager();
+        void InitializeGlutCallbacks();
+        void static RenderSceneCB();
+        int glewInitialize();
+        int gameGo();
 };
 #endif

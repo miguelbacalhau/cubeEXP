@@ -19,9 +19,9 @@ SRCDIRS := $(shell find . -name '*.$(SRCEXT)' -exec dirname {} \; | uniq)
 OBJS    := $(patsubst %.$(SRCEXT),$(OBJDIR)/%.o,$(SRCS))
 
 DEBUG   =
-INCLUDE =
+INCLUDE = -I Include
 CFLAGS  = -Wall -ansi -c $(DEBUG) $(INCLUDE)
-OFLAGS  =
+OFLAGS  = -lglfw -lm -lGL -lGLU
 
 all:    $(APP)
 
