@@ -5,6 +5,7 @@
 #
 # purpose: searches recursively in current directory for c/cpp files (using find),
 #          compile each source file and link them in a executable.
+#  TODO give creditz
 # ----------------------------------------------------------------------------
 
 APP     = main
@@ -19,7 +20,7 @@ SRCDIRS := $(shell find . -name '*.$(SRCEXT)' -exec dirname {} \; | uniq)
 OBJS    := $(patsubst %.$(SRCEXT),$(OBJDIR)/%.o,$(SRCS))
 
 DEBUG   =
-INCLUDE = -I Include
+INCLUDE = -I Include -I src
 CFLAGS  = -Wall -ansi -c $(DEBUG) $(INCLUDE)
 OFLAGS  = -lglfw -lm -lGL -lGLU
 

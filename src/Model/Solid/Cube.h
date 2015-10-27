@@ -7,8 +7,7 @@ class Cube : public Solid {
     private:
         double _sideLenght;
     public:
-        Cube(double sidesLenght);
-        std::string getName();
+        Cube(double sidesLenght, Position position, Color color);
         double getSideLenght();
         void accept(Visitor *visitor);
 };

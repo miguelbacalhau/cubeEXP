@@ -1,7 +1,7 @@
 #ifndef INCLUDED_SOLID
 #define INCLUDED_SOLID
 #include <iostream>
-#include "../Visitor/Visited.h"
+#include "../Model.h"
 
 /**
  * forward declarations of classes
@@ -9,13 +9,13 @@
  */
 class Visitor;
 
-class Solid : public Visited {
+class Solid : public Model {
 
     private:
-        float _positionX, _positionY, _positionZ;
-        float color;
+        Color _color;
     public:
-        std::string virtual getName() = 0;
+        Solid(Position position, Color color);
+        Color getColor();
         void virtual accept(Visitor *visitor);
 };
 #endif

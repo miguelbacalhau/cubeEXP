@@ -1,21 +1,24 @@
 #include <iostream>
 #include "Cube.h"
-#include "../Visitor/Visitor.h"
+#include "../../Visitor/Visitor.h"
 
-Cube::Cube(double sidesLenght) {
+/**
+ * Constructure
+ */
+Cube::Cube(double sidesLenght, Position position, Color color)
+    :Solid(position, color) {
     this->_sideLenght = sidesLenght;
 }
+
 /**
  * Getters & Setters
  */
-std::string Cube::getName() {
-    return "I am Cube";
-}
 double Cube::getSideLenght() {
     return this->_sideLenght;
 }
 
 /**
+ * Visitor Pattern accept
  * @Override
  */
 void Cube::accept(Visitor *visitor) {

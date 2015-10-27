@@ -2,11 +2,11 @@
 #define INCLUDED_MASTERMANAGER
 #include "Window/Window.h"
 
-class Solid;
+class Model;
 
 class MasterManager {
     private:
-        Solid* solid;
+        Model* solid;
         Window* window;
 
     public:
