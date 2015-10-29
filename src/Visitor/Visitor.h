@@ -5,15 +5,15 @@
  * forward declarations of classes
  * (avoids circular dependencies)
  */
-class CompModel;
+class CompositeModel;
 class Solid;
 class Cube;
 
 class Visitor {
 
     public:
-        void virtual visit(Solid *solid) = 0;
-        void virtual visit(Cube *cube) = 0;
-        void virtual visit(CompModel *compModel) = 0;
+       virtual void visit(Solid *solid) = 0;
+       virtual void visit(Cube *cube) = 0;
+       virtual void visit(CompositeModel *compModel) = 0;
 };
 #endif

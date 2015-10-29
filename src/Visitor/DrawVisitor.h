@@ -5,7 +5,7 @@
 class DrawVisitor : public Visitor {
 
     public:
-        void visit(CompModel *compModel);
+        void visit(CompositeModel *compModel);
         void visit(Solid *solid);
         void visit(Cube *cube);
 };

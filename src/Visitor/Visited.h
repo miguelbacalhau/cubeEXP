@@ -10,6 +10,6 @@ class Visitor;
 class Visited {
 
     public:
-        void virtual accept(Visitor *visitor) = 0;
+        virtual void accept(Visitor *visitor) = 0;
 };
 #endif

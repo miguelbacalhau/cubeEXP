@@ -1,11 +1,11 @@
 #include <vector>
-#include "CompModel.h"
+#include "CompositeModel.h"
 #include "../Visitor/Visitor.h"
 
 /**
  * Constructure
  */
-CompModel::CompModel(Position position, std::vector<Model*> subModels)
+CompositeModel::CompositeModel(Position position, std::vector<Model*> subModels)
     :Model(position){
     this->_subModels = subModels;
 }
@@ -13,13 +13,13 @@ CompModel::CompModel(Position position, std::vector<Model*> subModels)
 /**
  * Getters & Setters
  */
-std::vector<Model*> CompModel::getSubModels() {
+std::vector<Model*> CompositeModel::getSubModels() {
     return this->_subModels;
 }
 
 /**
  * Visitor Pattern accept
  */
-void CompModel::accept(Visitor *visitor) {
+void CompositeModel::accept(Visitor *visitor) {
     visitor->visit(this);
 }

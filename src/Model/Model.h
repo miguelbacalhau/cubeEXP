@@ -16,6 +16,6 @@ class Model : public Visited {
     public:
         Model(Position position);
         Position getPosition();
-        void virtual accept(Visitor *visitor) = 0;
+        virtual void accept(Visitor *visitor) = 0;
 };
 #endif

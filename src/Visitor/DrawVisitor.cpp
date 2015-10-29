@@ -3,12 +3,12 @@
 #include <stdlib.h>
 #include <GLFW/glfw3.h>
 #include "DrawVisitor.h"
-#include "../Model/CompModel.h"
+#include "../Model/CompositeModel.h"
 #include "../Model/Solid/Solid.h"
 #include "../Model/Solid/Cube.h"
 
-void DrawVisitor::visit(CompModel *compModel) {
-    //TODO move the the model as a whole, check stupid matrix stuff
+void DrawVisitor::visit(CompositeModel *compModel) {
+    //TODO check stupid matrix stuff
     Position position = compModel->getPosition();
     std::vector<Model*> subModels = compModel->getSubModels();
     glPushMatrix();

@@ -1,5 +1,5 @@
-#ifndef INCLUDED_COMPMODEL
-#define INCLUDED_COMPMODEL
+#ifndef INCLUDED_COMPOSITEMODEL
+#define INCLUDED_COMPOSITEMODEL
 #include <vector>
 #include "Model.h"
 
@@ -9,12 +9,12 @@
  */
 class Visitor;
 
-class CompModel : public Model {
+class CompositeModel : public Model {
 
     private:
         std::vector<Model*> _subModels;
     public:
-        CompModel(Position position, std::vector<Model*> subModels);
+        CompositeModel(Position position, std::vector<Model*> subModels);
         std::vector<Model*> getSubModels();
         void accept(Visitor *visitor);
 };
