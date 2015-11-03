@@ -15,3 +15,7 @@ Model::Model(Position position){
 Position Model::getPosition() {
     return this->_position;
 }
+
+void Model::setPosition(Position position) {
+    this->_position = position;
+}

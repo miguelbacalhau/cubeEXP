@@ -4,6 +4,7 @@
 #include "MasterManager.h"
 
 double rotate_x = 0, rotate_y = 0;
+MasterManager* manager = new MasterManager();
 
 static void error_callback(int error, const char* description)
 {
@@ -24,6 +25,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         rotate_x += 2.5;
     else if (key == GLFW_KEY_DOWN)
         rotate_x -= 2.5;
+    else manager->key(key);
     //  Request display update
 }
 int main(void)
@@ -61,7 +63,6 @@ int main(void)
         glRotatef( rotate_y, 0.0, 1.0, 0.0 );
 
         glPushMatrix();
-        MasterManager *manager = new MasterManager();
         manager->gameGo();
         glPopMatrix();
 

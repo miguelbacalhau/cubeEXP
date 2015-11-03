@@ -1,6 +1,6 @@
 #ifndef INCLUDED_MODEL
 #define INCLUDED_MODEL
-#include <CommonDataStructures.h>
+#include "../CommonDataStructures.h"
 #include "../Visitor/Visited.h"
 
 /**
@@ -16,6 +16,7 @@ class Model : public Visited {
     public:
         Model(Position position);
         Position getPosition();
+        void setPosition(Position position);
         virtual void accept(Visitor *visitor) = 0;
 };
 #endif

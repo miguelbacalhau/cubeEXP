@@ -14,7 +14,7 @@ CubeSphereFactory::CubeSphereFactory(double size, int rings, int points) {
 }
 
 /**
- * Setter
+ * Setters
  */
 void CubeSphereFactory::setSize(double size) {
     this->_size = size;
@@ -30,7 +30,7 @@ void CubeSphereFactory::setPoints(int points) {
 
 /**
  * Model Factory override
- * create a CubeSphere model
+ * creates a Sphere made out of cubes Model
  */
 Model* CubeSphereFactory::makeModel() {
     std::vector<Position> positions;
@@ -42,9 +42,7 @@ Model* CubeSphereFactory::makeModel() {
     color.red = 0.6;
     std::vector<Model*> models;
     for(std::vector<Position>::iterator positionIt = positions.begin(); positionIt != positions.end(); ++positionIt) {
-        position.x = positionIt->x;
-        position.y = positionIt->y;
-        position.z = positionIt->z;
+        position = *positionIt;
         models.push_back(
             new Cube(this->_size, position, color)
         );

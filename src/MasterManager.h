@@ -2,11 +2,11 @@
 #define INCLUDED_MASTERMANAGER
 #include "Window/Window.h"
 
-class Model;
+class GameObject;
 
 class MasterManager {
     private:
-        Model* solid;
+        GameObject* gameObject;
         Window* window;
 
     public:
@@ -15,5 +15,6 @@ class MasterManager {
         void static RenderSceneCB();
         int glewInitialize();
         int gameGo();
+        void key(int keyCode);
 };
 #endif
