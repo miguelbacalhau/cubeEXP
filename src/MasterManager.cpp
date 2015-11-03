@@ -3,14 +3,14 @@
 #include <GL/freeglut.h>
 #include "MasterManager.h"
 #include "Model/Model.h"
-#include "Factory/TomatoFactory.h"
+#include "Factory/CubeSphereFactory.h"
 #include "Visitor/Visitor.h"
 #include "Visitor/DrawVisitor.h"
 #include "Window/Window.h"
 
 MasterManager::MasterManager() {
     this->window = new Window();
-    TomatoFactory* factory = new TomatoFactory();
+    CubeSphereFactory* factory = new CubeSphereFactory(0.01, 100, 100);
     this->solid = factory->makeModel();
 }
 

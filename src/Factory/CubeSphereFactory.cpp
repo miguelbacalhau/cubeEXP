@@ -1,27 +1,41 @@
 #include <iostream>
-#include <cstdlib>
-#include <math.h>
 #include "../CommonDataStructures.h"
-#include "TomatoFactory.h"
+#include "CubeSphereFactory.h"
 #include "../Model/Solid/Cube.h"
 #include "../Model/CompositeModel.h"
 
 /**
- * Constructure
+ * Constructor
  */
-TomatoFactory::TomatoFactory(double size) {
+CubeSphereFactory::CubeSphereFactory(double size, int rings, int points) {
     this->_size = size;
+    this->_rings = rings;
+    this->_points = points;
 }
 
 /**
  * Setter
  */
-void TomatoFactory::setSize(double size) {
+void CubeSphereFactory::setSize(double size) {
     this->_size = size;
 }
 
-Model* TomatoFactory::makeModel() {
-    std::vector<Position> positions = CommonHelpers::generateSpherePositions(25, 25);
+void CubeSphereFactory::setRings(int rings) {
+    this->_rings = rings;
+}
+
+void CubeSphereFactory::setPoints(int points) {
+    this->_points = points;
+}
+
+/**
+ * Model Factory override
+ * create a CubeSphere model
+ */
+Model* CubeSphereFactory::makeModel() {
+    std::vector<Position> positions;
+    positions = CommonHelpers::generateSpherePositions(this->_rings, this->_points);
+
     Position position;
     Color color;
     color.green = color.blue = 0.0;
