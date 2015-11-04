@@ -10,7 +10,7 @@ MasterManager* manager = new MasterManager();
 void reshape(GLsizei w, GLsizei h) {
 	glViewport(0, 0, w, h);
 
-	glMatrixMode(GL_PROJECTION);
+	/*glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
 	if (w <= h)
@@ -18,7 +18,18 @@ void reshape(GLsizei w, GLsizei h) {
 	else  glOrtho(-2.0 * (GLfloat) w / (GLfloat) h, 2.0 * (GLfloat) w / (GLfloat) h, -2.0, 2.0, -3.0f, 3.0f);
 
 	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();*/
+
+    glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+	if (w <= h)
+		gluPerspective(50, h / w, 0.0, 10.0 );
+	else  gluPerspective(50, w / h, 0.0, 10.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt(0.0, 5.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
 }
 
 void display(void) {

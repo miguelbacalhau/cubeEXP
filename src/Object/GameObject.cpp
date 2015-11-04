@@ -64,13 +64,13 @@ void GameObject::moveLeft(double units) {
 void GameObject::moveForward(double units) {
     Position position;
     position.x = position.y = 0;
-    position.z = units;
+    position.z = - units;
     this->movePosition(position);
 }
 
 void GameObject::moveBack(double units) {
     Position position;
     position.x = position.y = 0;
-    position.z = - units;
+    position.z = units;
     this->movePosition(position);
 }
