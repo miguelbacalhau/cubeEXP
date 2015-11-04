@@ -33,22 +33,25 @@ int MasterManager::gameGo() {
 
     return 0;
 }
-void MasterManager::key(int keyCode) {
-    Position position;
-    position.x = position.y = position.z = 0.0;
+void MasterManager::key(unsigned char keyCode) {
     switch (keyCode) {
-        case 65:
-            position.x = - VELOCITY;
+        case 'd':
+            this->gameObject->moveRight(VELOCITY);
             break;
-        case 68:
-            position.x = VELOCITY;
+        case 'a':
+            this->gameObject->moveLeft(VELOCITY);
             break;
-        case 87:
-            position.y = VELOCITY;
+        case 'w':
+            this->gameObject->moveUp(VELOCITY);
             break;
-        case 83:
-            position.y = - VELOCITY;
+        case 's':
+            this->gameObject->moveDown(VELOCITY);
+            break;
+        case 'j':
+            this->gameObject->moveForward(VELOCITY);
+            break;
+        case 'k':
+            this->gameObject->moveBack(VELOCITY);
             break;
     }
-    this->gameObject->movePosition(position);
 }

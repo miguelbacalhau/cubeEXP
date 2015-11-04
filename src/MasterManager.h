@@ -15,6 +15,6 @@ class MasterManager {
         void static RenderSceneCB();
         int glewInitialize();
         int gameGo();
-        void key(int keyCode);
+        void key(unsigned char keyCode);
 };
 #endif

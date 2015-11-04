@@ -33,3 +33,44 @@ void GameObject::movePosition(Position position) {
     this->setPosition(finalPosition);
 }
 
+void GameObject::moveUp(double units) {
+    Position position;
+    position.x = position.z = 0;
+    position.y = units;
+    this->movePosition(position);
+}
+
+void GameObject::moveDown(double units) {
+    Position position;
+    position.x = position.z = 0;
+    position.y = - units;
+    this->movePosition(position);
+}
+
+void GameObject::moveRight(double units) {
+    Position position;
+    position.y = position.z = 0;
+    position.x = units;
+    this->movePosition(position);
+}
+
+void GameObject::moveLeft(double units) {
+    Position position;
+    position.y = position.z = 0;
+    position.x = - units;
+    this->movePosition(position);
+}
+
+void GameObject::moveForward(double units) {
+    Position position;
+    position.x = position.y = 0;
+    position.z = units;
+    this->movePosition(position);
+}
+
+void GameObject::moveBack(double units) {
+    Position position;
+    position.x = position.y = 0;
+    position.z = - units;
+    this->movePosition(position);
+}

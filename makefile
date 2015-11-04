@@ -22,7 +22,7 @@ OBJS    := $(patsubst %.$(SRCEXT),$(OBJDIR)/%.o,$(SRCS))
 DEBUG   =
 INCLUDE = -I Include -I src
 CFLAGS  = -Wall -ansi -c $(DEBUG) $(INCLUDE)
-OFLAGS  = -lglfw -lm -lGL -lGLU
+OFLAGS  = -lglut -lm -lGL -lGLU
 
 all:    $(APP)
 
@@ -35,7 +35,7 @@ $(OBJDIR)/%.o: %.$(SRCEXT)
 	@$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	$(RM) -r $(OBJDIR)
+	$(RM) -r $(OBJDIR) $(APP)
 
 buildrepo:
 	$(call make-repo)

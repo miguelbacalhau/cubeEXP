@@ -17,12 +17,33 @@ class GameObject {
         // TODO animation?
 
     public:
+        /**
+         * Constructor
+         */
         GameObject();
+
+        /**
+         * Getters & Setters
+         */
         Model* getModel();
         void setModel(Model* model);
         Position getPosition();
         void setPosition(Position position);
+
+        /**
+         * Movement
+         */
         void movePosition(Position position);
+        void moveUp(double units);
+        void moveDown(double units);
+        void moveRight(double units);
+        void moveLeft(double units);
+        void moveForward(double units);
+        void moveBack(double units);
+
+        /**
+         * Builds the desired Model
+         */
         virtual void buildModel() = 0;
 };
 #endif

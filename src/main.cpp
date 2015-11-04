@@ -1,4 +1,5 @@
-#include <GLFW/glfw3.h>
+#include <GL/freeglut.h>
+#include <cmath>
 #include <stdlib.h>
 #include <stdio.h>
 #include "MasterManager.h"
@@ -6,70 +7,50 @@
 double rotate_x = 0, rotate_y = 0;
 MasterManager* manager = new MasterManager();
 
-static void error_callback(int error, const char* description)
-{
-    fputs(description, stderr);
+void reshape(GLsizei w, GLsizei h) {
+	glViewport(0, 0, w, h);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	if (w <= h)
+		glOrtho(-2.0, 2.0, -2.0 * (GLfloat) h / (GLfloat) w, 2.0 * (GLfloat) h / (GLfloat) w, -3.0f, 3.0f);
+	else  glOrtho(-2.0 * (GLfloat) w / (GLfloat) h, 2.0 * (GLfloat) w / (GLfloat) h, -2.0, 2.0, -3.0f, 3.0f);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 }
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
 
-    //  Right arrow - increase rotation by 5 degree
-    if (key == GLFW_KEY_RIGHT)
-        rotate_y += 2.5;
-    //  Left arrow - decrease rotation by 5 degree
-    else if (key == GLFW_KEY_LEFT)
-        rotate_y -= 2.5;
-    else if (key == GLFW_KEY_UP)
-        rotate_x += 2.5;
-    else if (key == GLFW_KEY_DOWN)
-        rotate_x -= 2.5;
-    else manager->key(key);
-    //  Request display update
+void display(void) {
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	manager->gameGo();
+
+	glutSwapBuffers();
 }
-int main(void)
+
+void keyboard (unsigned char key, int x, int y)
 {
-    GLFWwindow* window;
-    glfwSetErrorCallback(error_callback);
-    if (!glfwInit())
-        exit(EXIT_FAILURE);
-    window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        exit(EXIT_FAILURE);
-    }
+    manager->key(key);
+	glutPostRedisplay();
+}
 
-        glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);
-    glfwSetKeyCallback(window, key_callback);
-    while (!glfwWindowShouldClose(window))
-    {
-        float ratio;
-        int width, height;
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = width / (float) height;
-        glViewport(0, 0, width, height);
-        glEnable(GL_DEPTH_TEST);
-        glClear( GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-ratio, ratio, -1.f, 1.f, 5.f, -5.f);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
+    glutInitWindowSize(1024, 768);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("CubeEx");
 
-        glRotatef( rotate_x, 1.0, 0.0, 0.0 );
-        glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+	glutKeyboardFunc(keyboard);
+    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
 
-        glPushMatrix();
-        manager->gameGo();
-        glPopMatrix();
+    glEnable(GL_DEPTH_TEST);
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-    glfwDestroyWindow(window);
-    glfwTerminate();
-    exit(EXIT_SUCCESS);
+    glutMainLoop();
+
+    return 0;
 }

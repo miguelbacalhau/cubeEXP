@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
-#include <GLFW/glfw3.h>
+#include <GL/freeglut.h>
 #include "DrawVisitor.h"
 #include "../Model/CompositeModel.h"
 #include "../Model/Solid/Solid.h"
