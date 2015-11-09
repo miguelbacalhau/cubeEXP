@@ -2,15 +2,23 @@
 #include "../Model/Model.h"
 #include <iostream>
 
+/**
+ * Constructor
+ */
 GameObject::GameObject() {
     Position position;
     position.x = position.y = position.z = 0;
     this->_position = position;
+    this->_movable = true;
 }
+/**
+ * Getters & Setters
+ */
 void GameObject::setModel(Model* model) {
     this->_model = model;
     std::cout << "bacalhau" << std::endl;
 }
+
 Model* GameObject::getModel() {
     return this->_model;
 }
@@ -25,6 +33,13 @@ void GameObject::setPosition(Position position) {
     std::cout << "x: " << this->_position.x << " y: " << this->_position.y << " z :" << this->_position.z << std::endl;
 }
 
+bool GameObject::isMovable() {
+    return this->_movable;
+}
+
+/**
+ * Movement
+ */
 void GameObject::movePosition(Position position) {
     Position finalPosition;
     finalPosition.x = this->_position.x + position.x;

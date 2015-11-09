@@ -13,6 +13,9 @@ struct Color {
     double red, green, blue;
 };
 
+struct Velocity {
+    double x, y ,z;
+};
 class CommonHelpers {
     public:
         static std::vector<Position> generateSpherePositions(int rings, int points);

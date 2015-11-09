@@ -11,7 +11,14 @@
 class BallObject : public GameObject{
 
     public:
+        /**
+         * Constructor
+         */
         BallObject();
+
+        /**
+         * Builds desired model
+         */
         void buildModel();
 };
 #endif

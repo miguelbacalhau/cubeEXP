@@ -47,6 +47,14 @@ void keyboard (unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
+void timer(int value){
+
+	manager->physicsGo();
+	glutPostRedisplay();
+
+	glutTimerFunc(5, timer, 0);
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -58,6 +66,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
+	glutTimerFunc(100, timer, 0);
 
     glEnable(GL_DEPTH_TEST);
 

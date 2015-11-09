@@ -14,6 +14,8 @@ class GameObject {
     private:
         Model* _model;
         Position _position;
+        Velocity velocity;
+        bool _movable;
         // TODO animation?
 
     public:
@@ -29,7 +31,7 @@ class GameObject {
         void setModel(Model* model);
         Position getPosition();
         void setPosition(Position position);
-
+        bool isMovable();
         /**
          * Movement
          */

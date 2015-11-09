@@ -3,6 +3,7 @@
 #include <GL/freeglut.h>
 #include "MasterManager.h"
 #include "Object/BallObject.h"
+#include "Object/Physics/Physics.h"
 #include "Model/Model.h"
 #include "Factory/CubeSphereFactory.h"
 #include "Visitor/Visitor.h"
@@ -13,8 +14,10 @@
 
 MasterManager::MasterManager() {
     this->window = new Window();
-    //CubeSphereFactory* factory = new CubeSphereFactory(0.01, 100, 100);
     this->gameObject = new BallObject();
+    this->objects = new std::vector<GameObject*>();
+    this->objects->push_back(this->gameObject);
+    this->physics = new Physics(this->objects);
 }
 
 void MasterManager::InitializeGlutCallbacks() {
@@ -25,6 +28,9 @@ void MasterManager::RenderSceneCB() {
 
 int MasterManager::glewInitialize() {
     return 0;
+}
+void MasterManager::physicsGo(){
+    this->physics->tick();
 }
 
 int MasterManager::gameGo() {
