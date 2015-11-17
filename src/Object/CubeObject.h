@@ -1,5 +1,5 @@
-#ifndef INCLUDED_BALLOBJECT
-#define INCLUDED_BALLOBJECT
+#ifndef INCLUDED_CUBEOBJECT
+#define INCLUDED_CUBEOBJECT
 
 #include "GameObject.h"
 
@@ -8,13 +8,13 @@
  * (avoids circular dependencies)
  */
 
-class BallObject : public GameObject{
+class CubeObject : public GameObject{
 
     public:
         /**
          * Constructor
          */
-        BallObject(bool movable);
+        CubeObject(bool movable);
 
         /**
          * Builds desired model

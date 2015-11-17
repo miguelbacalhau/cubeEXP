@@ -16,6 +16,10 @@ class CompositeModel : public Model {
     public:
         CompositeModel(Position position, std::vector<Model*> subModels);
         std::vector<Model*> getSubModels();
+        Volume getVolume();
+        double getSizeX();
+        double getSizeY();
+        double getSizeZ();
         void accept(Visitor *visitor);
 };
 #endif

@@ -5,7 +5,8 @@
  * Constructor
  * instatiates the object and builds its model
  */
-BallObject::BallObject() {
+BallObject::BallObject(bool movable) :
+    GameObject(movable) {
     this->buildModel();
 }
 

@@ -20,7 +20,9 @@ class Physics {
         void tick();
 
     private:
-        void gravity(GameObject* object);
-        void velocityGoGo(GameObject* object);
+        void gravity();
+        double colision();
+        void checkCollision(GameObject* a, GameObject* b);
+        void velocityGoGo();
 };
 #endif

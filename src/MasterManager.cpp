@@ -2,7 +2,7 @@
 #include <vector>
 #include <GL/freeglut.h>
 #include "MasterManager.h"
-#include "Object/BallObject.h"
+#include "Object/CubeObject.h"
 #include "Object/Physics/Physics.h"
 #include "Model/Model.h"
 #include "Factory/CubeSphereFactory.h"
@@ -10,12 +10,19 @@
 #include "Visitor/DrawVisitor.h"
 #include "Window/Window.h"
 
-#define VELOCITY 0.1
+#define VELOCITY 0.01
 
 MasterManager::MasterManager() {
     this->window = new Window();
-    this->gameObject = new BallObject();
     this->objects = new std::vector<GameObject*>();
+    Position position;
+    position.x = position.y = position.z = 0.0;
+    this->gameObject = new CubeObject(false);
+    this->gameObject->setPosition(position);
+    this->objects->push_back(this->gameObject);
+    position.y = 1.0;
+    this->gameObject = new CubeObject(true);
+    this->gameObject->setPosition(position);
     this->objects->push_back(this->gameObject);
     this->physics = new Physics(this->objects);
 }
@@ -35,29 +42,60 @@ void MasterManager::physicsGo(){
 
 int MasterManager::gameGo() {
     DrawVisitor *drawVisitor = new DrawVisitor();
-    this->gameObject->getModel()->accept(drawVisitor);
+    GameObject* object;
+    for(std::vector<GameObject*>::iterator objectIt = this->objects->begin(); objectIt != this->objects->end(); ++objectIt) {
+        object = *objectIt;
+        object->getModel()->accept(drawVisitor);
+    }
+    Velocity velocity = this->gameObject->getVelocity();
+    std::cout << "x: " << velocity.x << " y: " << velocity.y << " z: " << velocity.z << std::endl;
 
     return 0;
 }
 void MasterManager::key(unsigned char keyCode) {
+    Velocity velocity = this->gameObject->getVelocity();
     switch (keyCode) {
+        case 'g':
+            velocity.x = 0.0;
+            velocity.y = 0.0;
+            velocity.z = 0.0;
+            this->gameObject->setVelocity(velocity);
+            break;
         case 'd':
-            this->gameObject->moveRight(VELOCITY);
+            velocity.x = VELOCITY;
+            velocity.y = 0.0;
+            velocity.z = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
         case 'a':
-            this->gameObject->moveLeft(VELOCITY);
+            velocity.x = - VELOCITY;
+            velocity.y = 0.0;
+            velocity.z = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
         case 'w':
-            this->gameObject->moveUp(VELOCITY);
+            velocity.y = VELOCITY;
+            velocity.x = 0.0;
+            velocity.z = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
         case 's':
-            this->gameObject->moveDown(VELOCITY);
+            velocity.y = - VELOCITY;
+            velocity.x = 0.0;
+            velocity.z = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
         case 'j':
-            this->gameObject->moveForward(VELOCITY);
+            velocity.z = VELOCITY;
+            velocity.y = 0.0;
+            velocity.x = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
         case 'k':
-            this->gameObject->moveBack(VELOCITY);
+            velocity.z = - VELOCITY;
+            velocity.y = 0.0;
+            velocity.x = 0.0;
+            this->gameObject->setVelocity(velocity);
             break;
     }
 }

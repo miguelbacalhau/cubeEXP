@@ -5,18 +5,18 @@
 /**
  * Constructor
  */
-GameObject::GameObject() {
+GameObject::GameObject(bool movable) {
     Position position;
     position.x = position.y = position.z = 0;
     this->_position = position;
-    this->_movable = true;
+    this->_movable = movable;
 }
+
 /**
  * Getters & Setters
  */
 void GameObject::setModel(Model* model) {
     this->_model = model;
-    std::cout << "bacalhau" << std::endl;
 }
 
 Model* GameObject::getModel() {
@@ -30,62 +30,72 @@ Position GameObject::getPosition() {
 void GameObject::setPosition(Position position) {
     this->_position = position;
     this->_model->setPosition(position);
-    std::cout << "x: " << this->_position.x << " y: " << this->_position.y << " z :" << this->_position.z << std::endl;
+}
+
+Velocity GameObject::getVelocity() {
+    return this->_velocity;
+}
+
+void GameObject::setVelocity(Velocity velocity) {
+    this->_velocity = velocity;
 }
 
 bool GameObject::isMovable() {
     return this->_movable;
 }
+void GameObject::setMovable(bool movable) {
+    this->_movable = movable;
+}
 
 /**
  * Movement
  */
-void GameObject::movePosition(Position position) {
+void GameObject::movePosition(Velocity velocity) {
     Position finalPosition;
-    finalPosition.x = this->_position.x + position.x;
-    finalPosition.y = this->_position.y + position.y;
-    finalPosition.z = this->_position.z + position.z;
+    finalPosition.x = this->_position.x + velocity.x;
+    finalPosition.y = this->_position.y + velocity.y;
+    finalPosition.z = this->_position.z + velocity.z;
     this->setPosition(finalPosition);
 }
 
 void GameObject::moveUp(double units) {
-    Position position;
-    position.x = position.z = 0;
-    position.y = units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.x = velocity.z = 0;
+    velocity.y = units;
+    this->movePosition(velocity);
 }
 
 void GameObject::moveDown(double units) {
-    Position position;
-    position.x = position.z = 0;
-    position.y = - units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.x = velocity.z = 0;
+    velocity.y = - units;
+    this->movePosition(velocity);
 }
 
 void GameObject::moveRight(double units) {
-    Position position;
-    position.y = position.z = 0;
-    position.x = units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.y = velocity.z = 0;
+    velocity.x = units;
+    this->movePosition(velocity);
 }
 
 void GameObject::moveLeft(double units) {
-    Position position;
-    position.y = position.z = 0;
-    position.x = - units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.y = velocity.z = 0;
+    velocity.x = - units;
+    this->movePosition(velocity);
 }
 
 void GameObject::moveForward(double units) {
-    Position position;
-    position.x = position.y = 0;
-    position.z = - units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.x = velocity.y = 0;
+    velocity.z = - units;
+    this->movePosition(velocity);
 }
 
 void GameObject::moveBack(double units) {
-    Position position;
-    position.x = position.y = 0;
-    position.z = units;
-    this->movePosition(position);
+    Velocity velocity;
+    velocity.x = velocity.y = 0;
+    velocity.z = units;
+    this->movePosition(velocity);
 }

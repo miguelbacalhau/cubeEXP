@@ -14,7 +14,7 @@ class GameObject {
     private:
         Model* _model;
         Position _position;
-        Velocity velocity;
+        Velocity _velocity;
         bool _movable;
         // TODO animation?
 
@@ -22,7 +22,7 @@ class GameObject {
         /**
          * Constructor
          */
-        GameObject();
+        GameObject(bool movable);
 
         /**
          * Getters & Setters
@@ -31,11 +31,15 @@ class GameObject {
         void setModel(Model* model);
         Position getPosition();
         void setPosition(Position position);
+        Velocity getVelocity();
+        void setVelocity(Velocity velocity);
         bool isMovable();
+        void setMovable(bool movable);
+
         /**
          * Movement
          */
-        void movePosition(Position position);
+        void movePosition(Velocity position);
         void moveUp(double units);
         void moveDown(double units);
         void moveRight(double units);

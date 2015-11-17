@@ -17,6 +17,10 @@ class Model : public Visited {
         Model(Position position);
         Position getPosition();
         void setPosition(Position position);
+        virtual Volume getVolume() = 0;
+        virtual double getSizeX() = 0;
+        virtual double getSizeY() = 0;
+        virtual double getSizeZ() = 0;
         virtual void accept(Visitor *visitor) = 0;
 };
 #endif

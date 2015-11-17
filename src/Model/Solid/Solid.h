@@ -2,6 +2,7 @@
 #define INCLUDED_SOLID
 #include <iostream>
 #include "../Model.h"
+#include "../../CommonDataStructures.h"
 
 /**
  * forward declarations of classes
@@ -16,6 +17,10 @@ class Solid : public Model {
     public:
         Solid(Position position, Color color);
         Color getColor();
-        void virtual accept(Visitor *visitor);
+        virtual double getSizeX() = 0;
+        virtual double getSizeY() = 0;
+        virtual double getSizeZ() = 0;
+        virtual Volume getVolume() = 0;
+        virtual void accept(Visitor *visitor);
 };
 #endif
