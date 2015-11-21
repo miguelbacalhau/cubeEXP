@@ -17,11 +17,17 @@ MasterManager::MasterManager() {
     this->objects = new std::vector<GameObject*>();
     Position position;
     position.x = position.y = position.z = 0.0;
-    this->gameObject = new CubeObject(false);
+    this->gameObject = new CubeObject(0.5);
+    this->gameObject->setMovable(false);
+    this->gameObject->setPosition(position);
+    this->objects->push_back(this->gameObject);
+    position.y = -2.0;
+    this->gameObject = new CubeObject(3.0);
+    this->gameObject->setMovable(false);
     this->gameObject->setPosition(position);
     this->objects->push_back(this->gameObject);
     position.y = 1.0;
-    this->gameObject = new CubeObject(true);
+    this->gameObject = new CubeObject(0.5);
     this->gameObject->setPosition(position);
     this->objects->push_back(this->gameObject);
     this->physics = new Physics(this->objects);
@@ -54,8 +60,26 @@ int MasterManager::gameGo() {
 }
 void MasterManager::key(unsigned char keyCode) {
     Velocity velocity = this->gameObject->getVelocity();
+    Force force;
+    Position position;
     switch (keyCode) {
+        case 'c':
+            force.x = 0.0;
+            force.y = 0.1;
+            force.z = 0.0;
+            this->gameObject->addForce(force);
+            break;
         case 'g':
+            position.x = 0.0;
+            position.y = 1.0;
+            position.z = 0.0;
+            this->gameObject->setPosition(position);
+            break;
+        case 'f':
+            position.x = 1.0;
+            position.y = 1.0;
+            position.z = 0.0;
+            this->gameObject->setPosition(position);
             velocity.x = 0.0;
             velocity.y = 0.0;
             velocity.z = 0.0;

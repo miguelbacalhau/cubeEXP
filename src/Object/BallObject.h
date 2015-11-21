@@ -14,7 +14,7 @@ class BallObject : public GameObject{
         /**
          * Constructor
          */
-        BallObject(bool movable);
+        BallObject();
 
         /**
          * Builds desired model

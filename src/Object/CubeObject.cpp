@@ -1,12 +1,14 @@
 #include "CubeObject.h"
 #include "../Model/Solid/Cube.h"
+#include <stdlib.h>
+#include <iostream>
 /**
  * Constructor
  * instatiates the object and builds its model
  */
-CubeObject::CubeObject(bool movable) :
-    GameObject(movable) {
-    //this->setPosition(position);
+CubeObject::CubeObject(double size) :
+    GameObject() {
+    this->_size = size;
     this->buildModel();
 }
 
@@ -17,8 +19,9 @@ void CubeObject::buildModel() {
     Position position;
     position.x = position.y = position.z = 0.0;
     Color color;
-    color.red = color.green = 0.0;
-    color.blue = 0.6;
-    Cube* cube = new Cube(0.5, position, color);
+    color.red = (double)(rand() % 100) / 100;
+    color.green = (double)(rand() % 100) / 100;
+    color.blue = (double)(rand() % 100) / 100;
+    Cube* cube = new Cube(this->_size, position, color);
     this->setModel(cube);
 }

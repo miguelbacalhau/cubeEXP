@@ -17,6 +17,21 @@ struct Velocity {
     double x, y ,z;
 };
 
+struct Acceleration {
+    double x, y ,z;
+};
+
+struct Force {
+    double x, y ,z;
+
+    Force& operator+=(const Force& a) {
+        x += a.x;
+        y += a.y;
+        z += a.z;
+        return *this;
+    }
+};
+
 struct Volume {
     double maxX, minX;
     double maxY, minY;

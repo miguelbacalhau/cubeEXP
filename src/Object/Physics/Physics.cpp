@@ -10,6 +10,7 @@ Physics::Physics(std::vector<GameObject*>* objects) {
 
 void Physics::tick() {
     this->gravity();
+    this->calculateForces();
     this->colision();
     this->velocityGoGo();
 }
@@ -20,10 +21,10 @@ void Physics::gravity() {
     for(std::vector<GameObject*>::iterator objectIt = objects->begin(); objectIt != objects->end(); ++objectIt) {
         object = *objectIt;
         if(object->isMovable()) {
-            Velocity velocity;
-            velocity = object->getVelocity();
-            velocity.y = velocity.y == 0.0 ? - GRAVITY_UNITS : velocity.y;
-            object->setVelocity(velocity);
+            Force force;
+            force.x = force.z = 0.0;
+            force.y = - 0.01;
+            object->addForce(force);
         }
     }
 }
@@ -44,11 +45,11 @@ void Physics::checkCollision(GameObject* objectA, GameObject* objectB) {
                 velocityA.x = velocityB.x = 0.0;
                 velocityA.y = velocityB.y = 0.0;
                 velocityA.z = velocityB.z = 0.0;
+                objectA->setVelocity(velocityA);
+                objectB->setVelocity(velocityB);
             }
         }
     }
-    objectA->setVelocity(velocityA);
-    objectB->setVelocity(velocityB);
 }
 
 double Physics::colision() {
@@ -75,5 +76,29 @@ void Physics::velocityGoGo() {
         object = *objectIt;
         Velocity velocity = object->getVelocity();
         object->movePosition(velocity);
+        Acceleration acceleration = object->getAcceleration();
+        velocity.x = velocity.x + acceleration.x;
+        velocity.y = velocity.y + acceleration.y;
+        velocity.z = velocity.z + acceleration.z;
+        object->setVelocity(velocity);
     }
 }
+
+void Physics::calculateForces() {
+    std::vector<GameObject*>* objects = this->_objects;
+    Force force;
+    Acceleration acceleration;
+    GameObject* object;
+    for(std::vector<GameObject*>::iterator objectIt = objects->begin(); objectIt != objects->end(); ++objectIt) {
+        object = *objectIt;
+        force = object->getForce();
+        //acceleration =object->getAcceleration();
+        acceleration.x = force.x;
+        acceleration.y = force.y;
+        acceleration.z = force.z;
+        object->setAcceleration(acceleration);
+        force.x = force.y = force.z = 0.0;
+        object->setForce(force);
+    }
+}
+

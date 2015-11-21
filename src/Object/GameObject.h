@@ -15,6 +15,8 @@ class GameObject {
         Model* _model;
         Position _position;
         Velocity _velocity;
+        Acceleration _acceleration;
+        Force _force;
         bool _movable;
         // TODO animation?
 
@@ -22,7 +24,7 @@ class GameObject {
         /**
          * Constructor
          */
-        GameObject(bool movable);
+        GameObject();
 
         /**
          * Getters & Setters
@@ -33,19 +35,22 @@ class GameObject {
         void setPosition(Position position);
         Velocity getVelocity();
         void setVelocity(Velocity velocity);
+        Acceleration getAcceleration();
+        void setAcceleration(Acceleration acceleration);
         bool isMovable();
         void setMovable(bool movable);
+        Force getForce();
+        void setForce(Force force);
+
+        /**
+         * Adds a new Force to the Object
+         */
+        void addForce(Force force);
 
         /**
          * Movement
          */
         void movePosition(Velocity position);
-        void moveUp(double units);
-        void moveDown(double units);
-        void moveRight(double units);
-        void moveLeft(double units);
-        void moveForward(double units);
-        void moveBack(double units);
 
         /**
          * Builds the desired Model

@@ -24,5 +24,6 @@ class Physics {
         double colision();
         void checkCollision(GameObject* a, GameObject* b);
         void velocityGoGo();
+        void calculateForces();
 };
 #endif

@@ -10,11 +10,13 @@
 
 class CubeObject : public GameObject{
 
+    private:
+        double _size;
     public:
         /**
          * Constructor
          */
-        CubeObject(bool movable);
+        CubeObject(double size);
 
         /**
          * Builds desired model
