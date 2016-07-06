@@ -9,6 +9,7 @@
 #include "Visitor/Visitor.h"
 #include "Visitor/DrawVisitor.h"
 #include "Window/Window.h"
+#include "Manager/Time.h"
 
 #define VELOCITY 0.01
 
@@ -31,6 +32,7 @@ MasterManager::MasterManager() {
     this->gameObject->setPosition(position);
     this->objects->push_back(this->gameObject);
     this->physics = new Physics(this->objects);
+    this->timeManager = new Time();
 }
 
 void MasterManager::InitializeGlutCallbacks() {
@@ -43,7 +45,7 @@ int MasterManager::glewInitialize() {
     return 0;
 }
 void MasterManager::physicsGo(){
-    this->physics->tick();
+    this->physics->tick(this->timeManager->getElapsedTime());
 }
 
 int MasterManager::gameGo() {
@@ -53,8 +55,8 @@ int MasterManager::gameGo() {
         object = *objectIt;
         object->getModel()->accept(drawVisitor);
     }
-    Velocity velocity = this->gameObject->getVelocity();
-    std::cout << "x: " << velocity.x << " y: " << velocity.y << " z: " << velocity.z << std::endl;
+    //Velocity velocity = this->gameObject->getVelocity();
+    //std::cout << "x: " << velocity.x << " y: " << velocity.y << " z: " << velocity.z << std::endl;
 
     return 0;
 }

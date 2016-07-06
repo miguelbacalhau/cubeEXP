@@ -5,6 +5,7 @@
 
 class GameObject;
 class Physics;
+class Time;
 
 class MasterManager {
     private:
@@ -12,6 +13,7 @@ class MasterManager {
         GameObject* gameObject;
         Window* window;
         Physics* physics;
+        Time* timeManager;
 
     public:
         MasterManager();
