@@ -2,7 +2,7 @@
 #define INCLUDED_PHYSICS
 #include <vector>
 
-#define GRAVITY_UNITS 0.01
+#define GRAVITY_UNITS 2.0
 
 /**
  * forward declarations of classes
@@ -17,13 +17,13 @@ class Physics {
 
     public:
         Physics(std::vector<GameObject*>* objects);
-        void tick();
+        void tick(double elapsedTime);
 
     private:
         void gravity();
         double colision();
         void checkCollision(GameObject* a, GameObject* b);
-        void velocityGoGo();
+        void velocityGoGo(double elapsedTime);
         void calculateForces();
 };
 #endif

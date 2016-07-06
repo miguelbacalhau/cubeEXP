@@ -78,10 +78,10 @@ void GameObject::addForce(Force force) {
 /**
  * Movement
  */
-void GameObject::movePosition(Velocity velocity) {
+void GameObject::movePosition(double time) {
     Position finalPosition;
-    finalPosition.x = this->_position.x + velocity.x;
-    finalPosition.y = this->_position.y + velocity.y;
-    finalPosition.z = this->_position.z + velocity.z;
+    finalPosition.x = this->_position.x + this->_velocity.x * time;
+    finalPosition.y = this->_position.y + this->_velocity.y * time;
+    finalPosition.z = this->_position.z + this->_velocity.z * time;
     this->setPosition(finalPosition);
 }

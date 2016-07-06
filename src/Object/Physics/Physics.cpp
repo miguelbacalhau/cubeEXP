@@ -8,11 +8,11 @@ Physics::Physics(std::vector<GameObject*>* objects) {
     this->_objects = objects;
 }
 
-void Physics::tick() {
+void Physics::tick(double elapsedTime) {
     this->gravity();
     this->calculateForces();
     this->colision();
-    this->velocityGoGo();
+    this->velocityGoGo(elapsedTime);
 }
 
 void Physics::gravity() {
@@ -23,7 +23,7 @@ void Physics::gravity() {
         if(object->isMovable()) {
             Force force;
             force.x = force.z = 0.0;
-            force.y = - 0.01;
+            force.y = - GRAVITY_UNITS;
             object->addForce(force);
         }
     }
@@ -45,8 +45,8 @@ void Physics::checkCollision(GameObject* objectA, GameObject* objectB) {
                 velocityA.x = velocityB.x = 0.0;
                 velocityA.y = velocityB.y = 0.0;
                 velocityA.z = velocityB.z = 0.0;
-                objectA->setVelocity(velocityA);
-                objectB->setVelocity(velocityB);
+                //objectA->setVelocity(velocityA);
+                //objectB->setVelocity(velocityB);
             }
         }
     }
@@ -55,13 +55,10 @@ void Physics::checkCollision(GameObject* objectA, GameObject* objectB) {
 double Physics::colision() {
     std::vector<GameObject*>* objects = this->_objects;
     GameObject *object, *otherObject;
-    Velocity velocity, otherVelocity;
     for(std::vector<GameObject*>::iterator objectIt = objects->begin(); objectIt != objects->end(); ++objectIt) {
         object = *objectIt;
-        velocity = object->getVelocity();
         for(std::vector<GameObject*>::iterator otherObjectIt = objectIt + 1; otherObjectIt != objects->end(); ++otherObjectIt) {
             otherObject = *otherObjectIt;
-            otherVelocity = otherObject->getVelocity();
             this->checkCollision(object, otherObject);
         }
     }
@@ -69,18 +66,18 @@ double Physics::colision() {
     return 0.0;
 }
 
-void Physics::velocityGoGo() {
+void Physics::velocityGoGo(double elapsedTime) {
     std::vector<GameObject*>* objects = this->_objects;
     GameObject* object;
     for(std::vector<GameObject*>::iterator objectIt = objects->begin(); objectIt != objects->end(); ++objectIt) {
         object = *objectIt;
         Velocity velocity = object->getVelocity();
-        object->movePosition(velocity);
         Acceleration acceleration = object->getAcceleration();
         velocity.x = velocity.x + acceleration.x;
         velocity.y = velocity.y + acceleration.y;
         velocity.z = velocity.z + acceleration.z;
         object->setVelocity(velocity);
+        object->movePosition(elapsedTime);
     }
 }
 

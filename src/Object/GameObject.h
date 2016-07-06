@@ -50,7 +50,7 @@ class GameObject {
         /**
          * Movement
          */
-        void movePosition(Velocity position);
+        void movePosition(double time);
 
         /**
          * Builds the desired Model
